@@ -171,7 +171,7 @@ public class Silo extends RebarBlock implements LogisticRebarBlock, InteractReba
         if (dropItem != null && this.stack != null) {
             dropItem.editPersistentDataContainer(pdc -> {
                 pdc.set(STACK_KEY, RebarSerializers.ITEM_STACK, this.stack);
-                pdc.set(AMOUNT_KEY, RebarSerializers.LONG, amount);
+                pdc.set(AMOUNT_KEY, RebarSerializers.LONG, this.amount);
             });
         }
         return dropItem;
@@ -181,8 +181,7 @@ public class Silo extends RebarBlock implements LogisticRebarBlock, InteractReba
     public @Nullable WailaDisplay getWaila(@NotNull Player player) {
         WailaDisplay display = WailaDisplay.of(this, player);
         if (stack == null) {
-            display.add(Component.translatable("pylon.message.silo.empty"));
-            return display;
+            return display.add(Component.translatable("pylon.message.silo.empty"));
         }
         return display.add(Component.translatable("pylon.message.silo.not-empty")
                 .arguments(

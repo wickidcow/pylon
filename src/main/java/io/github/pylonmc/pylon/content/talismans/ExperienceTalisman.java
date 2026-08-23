@@ -56,12 +56,14 @@ public class ExperienceTalisman extends Talisman {
         @EventHandler(priority = EventPriority.LOWEST)
         public void onPlayerGainXP(PlayerPickupExperienceEvent event){
             Float xpMultiplier = event.getPlayer().getPersistentDataContainer().get(XP_MULTIPLIER_KEY, PersistentDataType.FLOAT);
-            if (xpMultiplier == null){
+            if (xpMultiplier == null) {
                 return;
             }
 
             ExperienceOrb orb = event.getExperienceOrb();
-            orb.setExperience(Math.round(orb.getExperience() * xpMultiplier));
+            if (orb.getSpawnReason() != ExperienceOrb.SpawnReason.CUSTOM && orb.getSpawnReason() != ExperienceOrb.SpawnReason.UNKNOWN) {
+                orb.setExperience(Math.round(orb.getExperience() * xpMultiplier));
+            }
         }
     }
 }
