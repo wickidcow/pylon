@@ -12,9 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.Collection;
 
 /**
@@ -47,7 +47,7 @@ public abstract class Rune extends RebarItem implements DropRebarItemHandler {
     public abstract void onRuneApply(@NotNull Player player, @NotNull Item runeItem, @NotNull Item targetItem);
 
     @Override
-    @OverridingMethodsMustInvokeSuper
+    @MustBeInvokedByOverriders
     @MultiHandler(priorities = EventPriority.MONITOR, ignoreCancelled = true)
     public void onDrop(@NotNull PlayerDropItemEvent event, @NotNull EventPriority priority) {
         Player player = event.getPlayer();
